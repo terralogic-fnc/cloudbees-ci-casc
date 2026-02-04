@@ -11,3 +11,5 @@ plugins:
   # Core CasC (usually already present, safe to declare)
   - id: configuration-as-code
   - id: oic-auth
+  - id: cloudbees-casc-client
+  - id: cloudbees-casc-server
