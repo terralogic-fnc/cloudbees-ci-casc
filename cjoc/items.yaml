@@ -8,11 +8,6 @@ items:
     displayName: Blue Controller
     description: Blue environment controller
 
-    groups:
-      - name: BlueAdmins
-        roles:
-          - name: administer
-
     properties:
       - configurationAsCode:
           bundle: mc-blue
@@ -29,20 +24,17 @@ items:
         clusterEndpointId: default
         allowExternalAgents: false
 
-        # ✅ HA + Autoscaling (CORRECT STRUCTURE)
         replication:
           config:
-            replicas: 2                  # minimum replicas
-            maxReplicas: 3               # scale up to 3
+            replicas: 2
+            maxReplicas: 3
             targetCPUUtilizationPercentage: 70
 
-        # Resources PER replica
         memory: 3072
         cpus: 1.0
         disk: 50
         fsGroup: "1000"
 
-        # Stability / production defaults
         terminationGracePeriodSeconds: 1200
         readinessInitialDelaySeconds: 30
         readinessTimeoutSeconds: 5
@@ -51,5 +43,4 @@ items:
         livenessPeriodSeconds: 10
         livenessTimeoutSeconds: 10
 
-        # URL path
         domain: blue
