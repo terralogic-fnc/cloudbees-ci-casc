@@ -1,0 +1,16 @@
+apiVersion: "2"
+id: "mc-blue"
+version: "1.0"
+description: "Managed Controller mc-alpha CasC bundle"
+
+jcasc:
+  - "jenkins.yaml"
+
+rbac:
+  - "rbac.yaml"
+  
+plugins:
+  - plugins.yaml
+
+pluginCatalog:
+  - plugin-catalog.yaml
