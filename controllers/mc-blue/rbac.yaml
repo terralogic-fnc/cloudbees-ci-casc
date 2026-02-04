@@ -1,0 +1,105 @@
+removeStrategy:
+  rbac: SYNC
+
+# =========================================================
+# Roles
+# =========================================================
+roles:
+  # -------------------------------------------------------
+  # Blue Admins / Lead Developers
+  # -------------------------------------------------------
+  - name: blue-admin
+    filterable: true
+    permissions:
+      - hudson.model.Hudson.Read
+      - hudson.model.Hudson.Administer
+
+      - hudson.model.Item.Read
+      - hudson.model.Item.Create
+      - hudson.model.Item.Configure
+      - hudson.model.Item.Delete
+      - hudson.model.Item.Move
+      - hudson.model.Item.Build
+      - hudson.model.Item.Cancel
+      - hudson.model.Item.Discover
+      - hudson.model.Item.Workspace
+
+      - hudson.model.Run.Read
+      - hudson.model.Run.Update
+      - hudson.model.Run.Delete
+
+      - hudson.model.View.Read
+      - hudson.model.View.Create
+      - hudson.model.View.Configure
+      - hudson.model.View.Delete
+
+      - hudson.scm.SCM.Tag
+
+  # -------------------------------------------------------
+  # Blue Developers (no delete / no admin)
+  # -------------------------------------------------------
+  - name: blue-developer
+    filterable: true
+    permissions:
+      - hudson.model.Hudson.Read
+
+      - hudson.model.Item.Read
+      - hudson.model.Item.Build
+      - hudson.model.Item.Configure
+      - hudson.model.Item.Cancel
+      - hudson.model.Item.Discover
+      - hudson.model.Item.Workspace
+
+      - hudson.model.Run.Read
+      - hudson.model.Run.Update
+
+      - hudson.model.View.Read
+
+  # -------------------------------------------------------
+  # Blue Read-Only Users
+  # -------------------------------------------------------
+  - name: blue-browse
+    filterable: true
+    permissions:
+      - hudson.model.Hudson.Read
+      - hudson.model.Item.Read
+      - hudson.model.Item.Discover
+      - hudson.model.Run.Read
+      - hudson.model.View.Read
+
+# =========================================================
+# Groups (Keycloak groups mapped here)
+# =========================================================
+groups:
+  # -------------------------------------------------------
+  # Admins (Keycloak: BlueAdmins)
+  # -------------------------------------------------------
+  - name: BlueAdmins
+    members:
+      external_groups:
+        - BlueAdmins
+    roles:
+      - name: blue-admin
+        grantedAt: current
+
+  # -------------------------------------------------------
+  # Developers (Keycloak: Blue)
+  # -------------------------------------------------------
+  - name: BlueDevelopers
+    members:
+      external_groups:
+        - Blue
+    roles:
+      - name: blue-developer
+        grantedAt: current
+
+  # -------------------------------------------------------
+  # Read-only users (optional)
+  # -------------------------------------------------------
+  - name: BlueViewers
+    members:
+      external_groups:
+        - BlueViewers
+    roles:
+      - name: blue-browse
+        grantedAt: current
