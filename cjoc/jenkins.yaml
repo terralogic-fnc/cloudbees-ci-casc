@@ -4,31 +4,28 @@ jenkins:
     Authentication: Keycloak (OIDC)
     Authorization: CloudBees RBAC (CasC enforced)
 
-  # CJOC must NEVER run builds
   numExecutors: 0
   mode: NORMAL
 
-  # -------------------------------------------------
-  # OIDC Security Realm – Keycloak
-  # -------------------------------------------------
   securityRealm:
     oic:
-      wellKnownOpenIDConfigurationUrl: https://keycloak.14.195.56.220.nip.io/realms/cloudbees/.well-known/openid-configuration
       clientId: cloudbees
       clientSecret: ${OIDC_CLIENT_SECRET}
 
-      scopes: openid profile email
+      serverConfiguration:
+        wellKnown:
+          wellKnownOpenIDConfigurationUrl: https://keycloak.14.195.56.220.nip.io/realms/cloudbees/.well-known/openid-configuration
+
       userNameField: preferred_username
-      userFullNameFieldName: name
-      userEmailFieldName: email
+      fullNameFieldName: name
+      emailFieldName: email
       groupsFieldName: groups
 
-      automaticUserCreation: true
+      groupIdStrategy: caseInsensitive
+      userIdStrategy: caseInsensitive
+
       logoutFromOpenidProvider: true
 
-  # -------------------------------------------------
-  # REQUIRED: CloudBees RBAC via CasC
-  # -------------------------------------------------
   authorizationStrategy: cloudBeesRoleBasedAccessControl
 
   crumbIssuer:
@@ -44,9 +41,6 @@ jenkins:
 
   slaveAgentPort: 50000
 
-# -------------------------------------------------
-# HARD SECURITY ENFORCEMENT (NO UI OVERRIDES)
-# -------------------------------------------------
 security:
   securitySettingsEnforcement:
     global:
@@ -60,16 +54,10 @@ security:
       canOverride: false
       count: 0
 
-# -------------------------------------------------
-# CasC Server (CJOC)
-# -------------------------------------------------
 cloudBeesCasCServer:
   visibility: true
   defaultBundle: cjoc
 
-# -------------------------------------------------
-# AUTO-PROVISION CONTROLLERS (items.yaml)
-# -------------------------------------------------
 unclassified:
   cascAutoControllerProvisioning:
     provisionControllerOnCreation: true
