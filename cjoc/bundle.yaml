@@ -1,17 +1,13 @@
+id: "bundle-1"
+version: "1"
 apiVersion: "2"
-id: "cjoc-minimal"
-version: "2"
-description: "Minimal CJOC CasC bundle"
-
+description: "My CloudBees Configuration as Code (CasC) bundle"
 jcasc:
   - "jenkins.yaml"
-
-
-rbac:
-  - "rbac.yaml"
-
-items:
-  - "items.yaml"
-
+jcascMergeStrategy: "errorOnConflict"
 plugins:
   - "plugins.yaml"
+items:
+  - "items.yaml"
+rbac:
+  - "rbac.yaml"
