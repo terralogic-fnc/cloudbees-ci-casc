@@ -1,30 +1,18 @@
 jenkins:
   systemMessage: |
     CloudBees Operations Center
-    Authentication: Keycloak (OIDC)
+    Authentication: Local Jenkins Users
     Authorization: CloudBees RBAC (CasC enforced)
 
   numExecutors: 0
   mode: NORMAL
 
   securityRealm:
-    oic:
-      clientId: cloudbees
-      clientSecret: ${OIDC_CLIENT_SECRET}
-
-      serverConfiguration:
-        wellKnown:
-          wellKnownOpenIDConfigurationUrl: https://keycloak.14.195.56.220.nip.io/realms/cloudbees/.well-known/openid-configuration
-
-      userNameField: preferred_username
-      fullNameFieldName: name
-      emailFieldName: email
-      groupsFieldName: groups
-
-      userIdStrategy: caseInsensitive
-      groupIdStrategy: caseInsensitive
-
-      logoutFromOpenidProvider: true
+    local:
+      allowsSignup: false
+      users:
+        - id: admin
+          password: ${JENKINS_ADMIN_PASSWORD}
 
   authorizationStrategy: cloudBeesRoleBasedAccessControl
 
@@ -33,13 +21,6 @@ jenkins:
       excludeClientIPFromCrumb: true
 
   disableRememberMe: true
-  quietPeriod: 5
-  scmCheckoutRetryCount: 0
-
-  remotingSecurity:
-    enabled: true
-
-  slaveAgentPort: 50000
 
 security:
   securitySettingsEnforcement:
@@ -49,22 +30,10 @@ security:
         canOverride: false
         defaultMappingFactory: restrictedEquivalentRAMF
 
-  controllerExecutorCount:
-    enforce:
-      canOverride: false
-      count: 0
-
 cloudBeesCasCServer:
   visibility: true
   defaultBundle: cjoc
 
 unclassified:
-  cascAutoControllerProvisioning:
-    provisionControllerOnCreation: true
-    fireAndForget: true
-    initialDelay: 15
-    timeout: 600
-    duration: 60
-
   location:
-    url: https://cjoc.14.195.56.220.nip.io/cjoc
+    url: https://cjoc.14.195.56.220.nip.io
