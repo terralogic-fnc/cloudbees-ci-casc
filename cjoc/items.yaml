@@ -1,0 +1,26 @@
+removeStrategy:
+  items: NONE
+  rbac: SYNC
+
+items:
+  - kind: managedController
+    name: mc-blue
+    displayName: Blue Controller
+    description: Blue environment controller
+    properties:
+      - configurationAsCode:
+          bundle: mc-blue
+      - licensing:
+          strategy:
+            perUserLicensingStrategy: {}
+    configuration:
+      kubernetes:
+        replication:
+          config:
+            replicas: 2
+            maxReplicas: 3
+            targetCPUUtilizationPercentage: 70
+        memory: 3072
+        cpus: 1.0
+        disk: 50
+        domain: blue
