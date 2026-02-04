@@ -1,5 +1,5 @@
 removeStrategy:
-  items: NONE
+  items: SYNC
   rbac: SYNC
 
 items:
@@ -7,20 +7,31 @@ items:
     name: mc-blue
     displayName: Blue Controller
     description: Blue environment controller
+
     properties:
+      # CasC bundle binding
       - configurationAsCode:
           bundle: mc-blue
+
+      # Licensing
       - licensing:
           strategy:
             perUserLicensingStrategy: {}
-    configuration:
-      kubernetes:
-        replication:
-          config:
-            replicas: 2
-            maxReplicas: 3
-            targetCPUUtilizationPercentage: 70
-        memory: 3072
-        cpus: 1.0
-        disk: 50
-        domain: blue
+
+      # Controller runtime configuration
+      - configuration:
+          kubernetes:
+            # HA + autoscaling
+            replication:
+              enabled: true
+              minReplicas: 2
+              maxReplicas: 3
+              targetCPUUtilizationPercentage: 70
+
+            # Resources per replica
+            memory: 3072
+            cpus: 1.0
+            disk: 50
+
+            # Controller subdomain
+            domain: blue
