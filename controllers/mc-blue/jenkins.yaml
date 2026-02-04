@@ -1,0 +1,28 @@
+jenkins:
+  systemMessage: |
+    Managed Controller: mc-blue
+    Authentication: Keycloak (OIDC via CJOC)
+    Authorization: CloudBees RBAC
+    Managed by CloudBees CasC
+
+  numExecutors: 2
+  mode: NORMAL
+
+  # ---------------------------------------------------
+  # IMPORTANT: Controllers do NOT define securityRealm
+  # They inherit OIDC from CJOC via SSO Relay
+  # ---------------------------------------------------
+
+  authorizationStrategy:
+    cloudBeesRoleBasedAccessControl: {}
+
+security:
+  securitySettingsEnforcement:
+    global:
+      realmAndAuthorization:
+        canCustomMapping: false
+        canOverride: false
+        defaultMappingFactory: restrictedEquivalentRAMF
+
+cloudBeesCasCServer:
+  visibility: true
