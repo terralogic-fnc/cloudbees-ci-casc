@@ -5,6 +5,7 @@ plugins:
   - id: cloudbees-casc-items-commons
 
   # REQUIRED for Git / SCM bundle retriever
+
   - id: cloudbees-casc-bundle-retriever
 
   # Core CasC (usually already present, safe to declare)
