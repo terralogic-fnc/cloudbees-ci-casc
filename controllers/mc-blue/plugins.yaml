@@ -1,0 +1,17 @@
+plugins:
+  # Core / CAP-safe plugins
+  - id: cloudbees-folder
+  - id: workflow-aggregator
+  - id: kubernetes
+  - id: git
+
+  # Non-CAP plugins (allowed by plugin catalog)
+  - id: extended-read-permission
+  - id: pipeline-utility-steps
+  - id: git-parameter
+  - id: timestamper
+  - id: ansiColor
+  - id: ws-cleanup
+  - id: credentials-binding
+  - id: pipeline-stage-view
+  - id: email-ext
