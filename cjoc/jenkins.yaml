@@ -16,10 +16,15 @@ jenkins:
         wellKnown:
           wellKnownOpenIDConfigurationUrl: https://keycloak.14.195.56.220.nip.io/realms/cloudbees/.well-known/openid-configuration
 
+      scopes: openid profile email
+
       userNameField: preferred_username
       fullNameFieldName: name
       emailFieldName: email
       groupsFieldName: groups
+
+      groupIdStrategy: caseInsensitive
+      userIdStrategy: caseInsensitive
 
       logoutFromOpenidProvider: true
 
