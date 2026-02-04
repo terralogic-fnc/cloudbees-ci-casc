@@ -1,0 +1,115 @@
+jenkins:
+  mode: NORMAL
+  numExecutors: 0
+  quietPeriod: 5
+  disableRememberMe: true
+
+  authorizationStrategy:
+    cloudBeesRoleBasedAccessControl: {}
+
+  securityRealm:
+    oic:
+      clientId: cloudbees
+      clientSecret: ${OIDC_CLIENT_SECRET}
+      wellKnownOpenIDConfigurationUrl: https://keycloak.14.195.56.220.nip.io/auth/realms/cloudbees/.well-known/openid-configuration
+      userNameField: preferred_username
+      groupsFieldName: groups
+      scopes: openid profile email
+      logoutFromOpenidProvider: true
+
+  crumbIssuer:
+    standard:
+      excludeClientIPFromCrumb: true
+
+  remotingSecurity:
+    enabled: true
+
+  agentProtocols:
+    - Diagnostic-Ping
+    - JNLP4-connect
+    - OperationsCenter2
+    - Ping
+
+  slaveAgentPort: 50000
+
+  markupFormatter:
+    plainText: {}
+
+  projectNamingStrategy:
+    standard: {}
+
+  primaryView:
+    masters:
+      name: Controllers
+      recurse: true
+      jobFilters:
+        - connectedMasterViewFilter
+      columns:
+        - jobName
+        - status
+        - weather
+        - masterConfigurationStaleViewColumn
+        - jenkinsVersionViewColumn
+        - cascViewColumn
+        - manageMaster
+        - totalJobsViewColumn
+        - queueSizeViewColumn
+        - listSelectionColumn
+
+  views:
+    - masters:
+        name: Controllers
+        recurse: true
+        jobFilters:
+          - connectedMasterViewFilter
+        columns:
+          - jobName
+          - status
+          - weather
+          - masterConfigurationStaleViewColumn
+          - jenkinsVersionViewColumn
+          - cascViewColumn
+          - manageMaster
+          - totalJobsViewColumn
+          - queueSizeViewColumn
+          - listSelectionColumn
+    - all:
+        name: all
+
+  viewsTabBar:
+    standard: {}
+
+  myViewsTabBar:
+    standard: {}
+
+cloudBeesCasCServer:
+  visibility: true
+
+beekeeper:
+  enabled: true
+  upgrades:
+    autoUpgradePlugins: true
+    autoDowngradePlugins: false
+  securityWarnings:
+    enabledForCore: true
+    enabledForPlugins: true
+
+security:
+  anonymizeSupportBundle:
+    enabled: false
+  apiToken:
+    creationOfLegacyTokenEnabled: false
+    tokenGenerationOnCreationEnabled: false
+    usageStatisticsEnabled: true
+  sSHD:
+    port: -1
+  securitySettingsEnforcement:
+    global:
+      realmAndAuthorization:
+        canCustomMapping: false
+        canOverride: false
+        defaultMappingFactory: restrictedEquivalentRAMF
+
+unclassified:
+  experimentalPlugins:
+    enabled: false
