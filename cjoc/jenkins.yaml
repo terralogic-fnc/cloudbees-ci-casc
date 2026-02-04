@@ -14,15 +14,12 @@ jenkins:
 
       serverConfiguration:
         wellKnown:
-          wellKnownOpenIDConfigurationUrl: http://keycloak.14.195.56.220.nip.io/realms/cloudbees/.well-known/openid-configuration
+          wellKnownOpenIDConfigurationUrl: https://keycloak.14.195.56.220.nip.io/realms/cloudbees/.well-known/openid-configuration
 
       userNameField: preferred_username
       fullNameFieldName: name
       emailFieldName: email
       groupsFieldName: groups
-
-      groupIdStrategy: caseInsensitive
-      userIdStrategy: caseInsensitive
 
       logoutFromOpenidProvider: true
 
@@ -67,4 +64,4 @@ unclassified:
     duration: 60
 
   location:
-    url: http://cjoc.14.195.56.220.nip.io/cjoc
+    url: https://cjoc.14.195.56.220.nip.io/cjoc
