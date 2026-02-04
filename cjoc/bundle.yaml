@@ -1,0 +1,17 @@
+apiVersion: "2"
+id: "cjoc-minimal"
+version: "2"
+description: "Minimal CJOC CasC bundle"
+
+jcasc:
+  - "jenkins.yaml"
+
+
+rbac:
+  - "rbac.yaml"
+
+items:
+  - "items.yaml"
+
+plugins:
+  - "plugins.yaml"
