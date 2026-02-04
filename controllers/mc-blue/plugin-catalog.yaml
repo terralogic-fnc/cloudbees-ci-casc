@@ -1,0 +1,45 @@
+type: plugin-catalog
+version: "1"
+
+name: mc-blue-plugin-catalog
+displayName: Blue Controller Plugin Catalog
+
+configurations:
+  - description: Approved non-CAP plugins for Blue controller
+    includePlugins:
+
+      # Read-only / Extended RBAC permissions
+      extended-read-permission:
+        version: "latest"
+
+      # Pipeline utility steps (readFile, writeFile, unzip, etc.)
+      pipeline-utility-steps:
+        version: "latest"
+
+      # Git parameter support in jobs
+      git-parameter:
+        version: "latest"
+
+      # Timestamper for logs
+      timestamper:
+        version: "latest"
+
+      # ANSI color support in console logs
+      ansiColor:
+        version: "latest"
+
+      # Workspace cleanup utilities
+      ws-cleanup:
+        version: "latest"
+
+      # Credentials binding (non-CAP in some versions)
+      credentials-binding:
+        version: "latest"
+
+      # Pipeline stage view enhancements
+      pipeline-stage-view:
+        version: "latest"
+
+      # Email notifications (if needed later)
+      email-ext:
+        version: "latest"
